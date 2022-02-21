@@ -1,56 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { Fragment, useEffect, useState } from "react";
+import { createApi } from "unsplash-js";
+import "./App.css";
+import Quote from "./Components/Quote";
+import WeatherWidget from "./Components/WeatherWidget";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectCurrentImage,
+  moveBackward,
+  moveForward,
+  getPhotos,
+} from "./features/backgroundSlice";
+import { getQuoteOfDay } from "./features/quoteSlice";
+import { getWeather } from "./features/weatherSlice";
+import InputBar from "./Components/InputBar";
+import BulletinBoard from "./Components/BulletinBoard";
+
+// will be hidden later
+// const accessKey = "FqHGLHi1ehTd0IdNZCKN8Fc5CJRruTU4nMnwLSvkj10";
+// const secretKey = "8MDkcDf4ZIdD7SX9L76fFeXEqvHhkRnGeeLxJVdinoI";
+
+// const api = createApi({
+//   accessKey: accessKey,
+// });
 
 function App() {
+  const currentImage = useSelector(selectCurrentImage);
+  const dispatch = useDispatch();
+  // console.log(moveBackward(), moveForward());
+
+  useEffect(() => {
+    dispatch(getQuoteOfDay());
+    dispatch(getWeather());
+    dispatch(getPhotos());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div className="App" style={{ backgroundImage: `url(${currentImage})` }}>
+      {/* <div className="overlay"></div> */}
+      <WeatherWidget />
+
+      <div className="centerContainer">
+        <button className="leftButton" onClick={() => dispatch(moveBackward())}>
+          {"<"}
+        </button>
+
+        <BulletinBoard />
+
+        <button className="rightButton" onClick={() => dispatch(moveForward())}>
+          {">"}
+        </button>
+      </div>
+      <Quote />
     </div>
   );
 }
