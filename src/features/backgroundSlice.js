@@ -24,10 +24,11 @@ export const getPhotos = createAsyncThunk(
       console.log("response recieved");
       console.log(response);
       // console.log(response);
-      const json = await response.json();
-      console.log("converted to json");
+      // const json = await response.json();
+      // console.log("converted to json");
       // console.log(json);
-      const photos = json.map((e) => e.urls.regular);
+
+      const photos = response.response.map((e) => e.urls.regular);
       console.log(photos);
       return photos;
     } catch (error) {
