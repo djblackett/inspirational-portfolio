@@ -24,6 +24,7 @@ export const getPhotos = createAsyncThunk(
       const json = await response.json();
       // console.log(json);
       const photos = json.map((e) => e.urls.regular);
+      console.log(photos);
       return photos;
     } catch (error) {
       console.log(error);
@@ -67,6 +68,7 @@ const options = {
     builder.addCase(getPhotos.fulfilled, (state, action) => {
       state.isFetching = false;
       state.fetchingError = false;
+      console.log(action.payload);
       state.images = [state.currentImage, ...action.payload];
     });
     builder.addCase(getPhotos.pending, (state, action) => {
