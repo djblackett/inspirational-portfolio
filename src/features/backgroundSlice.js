@@ -63,7 +63,7 @@ const options = {
       state.isFetching = false;
       state.fetchingError = false;
       state.photos = action.payload;
-      state.currentImage = state.photos[0];
+      state.currentImage = action.payload[0];
     });
     builder.addCase(getPhotos.pending, (state, action) => {
       state.isFetching = true;
