@@ -32,9 +32,12 @@ export const getPhotos = createAsyncThunk(
 const options = {
   name: "background",
   initialState: {
-    images: [],
+    images: [
+      "https://images.unsplash.com/photo-1641988076864-933422e0af0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDExNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDQ4MDA1MTE&ixlib=rb-1.2.1&q=80&w=1080",
+    ],
     currentIndex: 0,
-    currentImage: "",
+    currentImage:
+      "https://images.unsplash.com/photo-1641988076864-933422e0af0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDExNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDQ4MDA1MTE&ixlib=rb-1.2.1&q=80&w=1080",
     isFetching: false,
     fetchingError: false,
   },
@@ -62,8 +65,7 @@ const options = {
     builder.addCase(getPhotos.fulfilled, (state, action) => {
       state.isFetching = false;
       state.fetchingError = false;
-      state.photos = action.payload;
-      state.currentImage = action.payload[0];
+      state.photos = [state.currentImage, ...action.payload];
     });
     builder.addCase(getPhotos.pending, (state, action) => {
       state.isFetching = true;
