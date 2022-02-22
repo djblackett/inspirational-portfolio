@@ -23,7 +23,7 @@ export const getPhotos = createAsyncThunk(
       // console.log(response);
       const json = await response.json();
       // console.log(json);
-      const photos = json.urls.regular;
+      const photos = json.map((e) => e.urls.regular);
       return photos;
     } catch (error) {
       console.log(error);
