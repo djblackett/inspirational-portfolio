@@ -22,6 +22,7 @@ export const getPhotos = createAsyncThunk(
         count: 10,
       });
       console.log("response recieved");
+      console.log(response);
       // console.log(response);
       const json = await response.json();
       console.log("converted to json");
