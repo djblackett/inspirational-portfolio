@@ -6,22 +6,25 @@ const unsplash = createApi({
   accessKey: "FqHGLHi1ehTd0IdNZCKN8Fc5CJRruTU4nMnwLSvkj10",
 });
 
-const urlArray = response.map((e) => e.urls.regular);
+// const urlArray = response.map((e) => e.urls.regular);
 
-const photosArray = async () =>
-  await unsplash.photos.getRandom({
-    count: 10,
-  });
+// const photosArray = async () =>
+//   await unsplash.photos.getRandom({
+//     count: 10,
+//   });
 
 export const getPhotos = createAsyncThunk(
   "background/getPhotos",
   async (id, thunkAPI) => {
+    console.log("thunk in progress");
     try {
       const response = await unsplash.photos.getRandom({
         count: 10,
       });
+      console.log("response recieved");
       // console.log(response);
       const json = await response.json();
+      console.log("converted to json");
       // console.log(json);
       const photos = json.map((e) => e.urls.regular);
       console.log(photos);
