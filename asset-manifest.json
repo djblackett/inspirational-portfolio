@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/inspirational-portfolio/static/css/main.1bd82c7f.css",
+    "main.js": "/inspirational-portfolio/static/js/main.7e1b70a7.js",
+    "index.html": "/inspirational-portfolio/index.html",
+    "main.1bd82c7f.css.map": "/inspirational-portfolio/static/css/main.1bd82c7f.css.map",
+    "main.7e1b70a7.js.map": "/inspirational-portfolio/static/js/main.7e1b70a7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1bd82c7f.css",
+    "static/js/main.7e1b70a7.js"
+  ]
+}
