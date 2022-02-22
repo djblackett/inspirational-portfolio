@@ -1,27 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+// Cannot hide access key without going through a relay server
+// Throwaway account just for development
 const accessKey = "7f12725cebc48256899d1bda1748836c";
-// http://api.openweathermap.org/data/2.5/forecast?lat=35&lon=139&appid=7f12725cebc48256899d1bda1748836c
+
 export const getWeather = createAsyncThunk(
   "weather/getWeather",
   async (id, thunkAPI) => {
     try {
+      const { lat, lon } = thunkAPI.getState().weather.coordinates;
+
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=35&lon=139&appid=${accessKey}`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${accessKey}`
       );
 
       const json = await response.json();
-      // console.log(json.list[0].weather[0].icon);
-      // console.log(json.list[0].main.temp);
-      const icon = json.list[0].weather[0].icon;
+      console.log(json);
 
-      // const iconResponse = await fetch(
-      //   `https://openweathermap.org/img/wn/${icon}@2x.png`
-      // );
+      const icon = json.list[0].weather[0].icon;
       return {
         temp: json.list[0].main.temp,
         icon: icon,
         description: json.list[0].weather[0].description,
+        city: json.city.name,
+        country: json.city.country,
       };
     } catch (error) {
       console.log(error);
@@ -33,12 +35,16 @@ const options = {
   name: "weather",
   initialState: {
     weather: {},
+    coordinates: { lat: 35, lon: 135 },
     isFetching: true,
     fetchingError: false,
   },
-  reducers: {},
+  reducers: {
+    getCoordinates(state, action) {
+      state.coordinates = action.payload;
+    },
+  },
   extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(getWeather.fulfilled, (state, action) => {
       state.isFetching = false;
       state.fetchingError = false;
@@ -56,7 +62,6 @@ const options = {
 };
 
 export const selectWeather = (state) => {
-  // console.log(JSON.stringify(state.weather.weather.list[0]));
   return state.weather.weather;
 };
 
@@ -69,5 +74,5 @@ export const selectFetchingError = (state) => {
 };
 
 const weatherSlice = createSlice(options);
-
+export const { getCoordinates } = weatherSlice.actions;
 export default weatherSlice.reducer;

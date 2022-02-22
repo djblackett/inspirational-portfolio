@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import InputBar from "./InputBar";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -10,7 +10,6 @@ import {
 function BulletinBoard() {
   const listItems = useSelector(selectListItems);
   const dispatch = useDispatch();
-  // console.log(listItems);
 
   return (
     <div className="bulletinContainer">

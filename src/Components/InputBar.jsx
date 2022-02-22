@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addListItem } from "../features/listItemsSlice";
 
 function InputBar() {
@@ -19,11 +19,7 @@ function InputBar() {
   };
 
   return (
-    <div
-      className="inputComponent"
-      // className={`input-component-${mode}`}
-      tabIndex={0}
-    >
+    <div className="inputComponent" tabIndex={0}>
       <p className="inputDescription">What's on your mind today?</p>
       <input
         id="input"

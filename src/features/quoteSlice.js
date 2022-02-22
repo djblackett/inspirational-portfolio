@@ -5,9 +5,7 @@ export const getQuoteOfDay = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await fetch("https://quotes.rest/qod?language=en");
-      // console.log(response);
       const json = await response.json();
-      // console.log(json);
       const quote = json.contents.quotes[0];
       return quote;
     } catch (error) {
@@ -25,7 +23,6 @@ const options = {
   },
   reducers: {},
   extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(getQuoteOfDay.fulfilled, (state, action) => {
       state.isFetching = false;
       state.fetchingError = false;
@@ -43,7 +40,6 @@ const options = {
 };
 
 export const selectQuote = (state) => {
-  // console.log(JSON.stringify(state.quote));
   return state.quote.quote;
 };
 

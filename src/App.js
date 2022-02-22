@@ -1,5 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { createApi } from "unsplash-js";
+import React, { useEffect } from "react";
 import "./App.css";
 import Quote from "./Components/Quote";
 import WeatherWidget from "./Components/WeatherWidget";
@@ -11,22 +10,12 @@ import {
   getPhotos,
 } from "./features/backgroundSlice";
 import { getQuoteOfDay } from "./features/quoteSlice";
-import { getWeather } from "./features/weatherSlice";
-import InputBar from "./Components/InputBar";
+import { getCoordinates, getWeather } from "./features/weatherSlice";
 import BulletinBoard from "./Components/BulletinBoard";
-
-// will be hidden later
-// const accessKey = "FqHGLHi1ehTd0IdNZCKN8Fc5CJRruTU4nMnwLSvkj10";
-// const secretKey = "8MDkcDf4ZIdD7SX9L76fFeXEqvHhkRnGeeLxJVdinoI";
-
-// const api = createApi({
-//   accessKey: accessKey,
-// });
 
 function App() {
   const currentImage = useSelector(selectCurrentImage);
   const dispatch = useDispatch();
-  // console.log(moveBackward(), moveForward());
 
   useEffect(() => {
     dispatch(getQuoteOfDay());
@@ -34,19 +23,49 @@ function App() {
     dispatch(getPhotos());
   }, []);
 
+  function geoFindMe() {
+    function success(position) {
+      let coordinates = {};
+      coordinates["lat"] = position.coords.latitude;
+      coordinates["lon"] = position.coords.longitude;
+      dispatch(getCoordinates(coordinates));
+      dispatch(getWeather());
+    }
+
+    function error() {
+      console.log("Unable to retrieve your location");
+    }
+
+    if (!navigator.geolocation) {
+      console.log("Geolocation is not supported by your browser");
+    } else {
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+  }
+
   return (
     <div className="App" style={{ backgroundImage: `url(${currentImage})` }}>
-      {/* <div className="overlay"></div> */}
+      <button className="location" onClick={() => geoFindMe()}>
+        Use my location for local weather
+      </button>
       <WeatherWidget />
 
       <div className="centerContainer">
-        <button className="leftButton" onClick={() => dispatch(moveBackward())}>
+        <button
+          id="leftButton"
+          className="navButton"
+          onClick={() => dispatch(moveBackward())}
+        >
           {"<"}
         </button>
 
         <BulletinBoard />
 
-        <button className="rightButton" onClick={() => dispatch(moveForward())}>
+        <button
+          id="rightButton"
+          className="navButton"
+          onClick={() => dispatch(moveForward())}
+        >
           {">"}
         </button>
       </div>

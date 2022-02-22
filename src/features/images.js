@@ -1,4 +1,6 @@
-export const response = [
+// hardcoded responses for unsplash API testing
+
+export const backupImages = [
   {
     id: "M3VnK17XiYo",
     created_at: "2022-01-12T07:12:48-05:00",

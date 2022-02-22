@@ -1,21 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let uniqueId = 0;
-
-// const initializeData = () => {
-//   // get the todos from localstorage
-//   const savedTodos = localStorage.getItem("todos");
-//   // if there are todos stored
-//   if (savedTodos && savedTodos !== "[]") {
-//     // return the parsed JSON object back to a javascript object
-//     return JSON.parse(savedTodos);
-//     // otherwise
-//   } else {
-//     // return an empty array
-//     //return initialData;
-//   }
-// };
 let colorIndex = 0;
+
 const randomColor = () => {
   const colors = [
     "teal",
@@ -24,10 +11,10 @@ const randomColor = () => {
     "olive",
     "purple",
     "brown",
-    "rgba(0,0,128, 0.5)",
+    "rgba(0,0,128, 0.8)",
     "darkorange",
     "darkgrey",
-    "rgba(255, 0, 0, 0.5)",
+    "rgba(255, 0, 0, 0.8)",
     "orchid",
   ];
   let index = colorIndex;
@@ -45,26 +32,31 @@ const options = {
     listItems: [
       {
         id: 11,
-        text: "hello mr potato head",
+        text: "Buy ingredients for supper",
         completed: false,
         color: "green",
       },
-      { id: 12, text: "hello mr potato foot", completed: false, color: "blue" },
+      {
+        id: 12,
+        text: "Practice piano skills",
+        completed: false,
+        color: "blue",
+      },
       {
         id: 13,
-        text: "nonononon onono nono nono nonono nono",
+        text: "Walk the dog",
         completed: false,
         color: "red",
       },
       {
         id: 14,
-        text: "nonono nonon onon onon onon onon onono",
+        text: "Go to the gym",
         completed: false,
-        color: "orange",
+        color: "darkorange",
       },
       {
         id: 15,
-        text: "nononon onon onon ono nono nonon onono",
+        text: "Think of other cool things to do to add to my todo list",
         completed: false,
         color: "purple",
       },
@@ -83,22 +75,9 @@ const options = {
         (item) => item.id !== action.payload
       );
     },
-    reorderItems(state, action) {
-      state.listItems = action.payload;
-      return state;
-    },
-    applyFilter(state, action) {
-      state.filteredListItems = action.payload;
-    },
     completeItem(state, action) {
       let listItem = state.listItems.find((item) => item.id === action.payload);
       listItem.completed = !listItem.completed;
-    },
-    clearCompletedItems(state) {
-      state.listItems = state.listItems.filter((item) => !item.completed);
-    },
-    resetList(state) {
-      // state.listItems = initialData;
     },
   },
 };
@@ -106,19 +85,10 @@ const options = {
 const listItemsSlice = createSlice(options);
 
 export function selectListItems(state) {
-  // console.log(state);
-  // console.log(state.listItems);
   return state.listItems.listItems;
 }
 
-export const {
-  addListItem,
-  removeListItem,
-  reorderItems,
-  applyFilter,
-  completeItem,
-  clearCompletedItems,
-  resetList,
-} = listItemsSlice.actions;
+export const { addListItem, removeListItem, completeItem } =
+  listItemsSlice.actions;
 
 export default listItemsSlice.reducer;

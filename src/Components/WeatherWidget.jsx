@@ -10,7 +10,6 @@ function WeatherWidget() {
   const weather = useSelector(selectWeather);
   const isFetching = useSelector(selectIsFetching);
   const fetchingError = useSelector(selectFetchingError);
-  // console.log(weather);
 
   if (isFetching) {
     return (
@@ -34,6 +33,9 @@ function WeatherWidget() {
         <div className="tempDescription">
           <p className="temp">{String((weather.temp - 270).toPrecision(3))}°</p>
           <p className="description">{weather.description}</p>
+          <p className="weatherLocation">
+            {weather.city}, {weather.country}
+          </p>
         </div>
       </div>
     );

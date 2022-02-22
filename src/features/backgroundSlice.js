@@ -1,38 +1,27 @@
 import { createApi } from "unsplash-js";
-import { response } from "./images";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { backupImages } from "./images";
 
+// Cannot hide access key without going through a relay server
+// Throwaway account just for development
 const unsplash = createApi({
   accessKey: "FqHGLHi1ehTd0IdNZCKN8Fc5CJRruTU4nMnwLSvkj10",
 });
 
-// const urlArray = response.map((e) => e.urls.regular);
-
-// const photosArray = async () =>
-//   await unsplash.photos.getRandom({
-//     count: 10,
-//   });
-
 export const getPhotos = createAsyncThunk(
   "background/getPhotos",
   async (id, thunkAPI) => {
-    console.log("thunk in progress");
     try {
       const response = await unsplash.photos.getRandom({
         count: 10,
       });
-      console.log("response recieved");
-      console.log(response);
-      // console.log(response);
-      // const json = await response.json();
-      // console.log("converted to json");
-      // console.log(json);
 
       const photos = response.response.map((e) => e.urls.regular);
-      console.log(photos);
       return photos;
     } catch (error) {
       console.log(error);
+      console.log("Fetching failed: backup images used");
+      return backupImages;
     }
   }
 );
@@ -69,11 +58,9 @@ const options = {
     },
   },
   extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(getPhotos.fulfilled, (state, action) => {
       state.isFetching = false;
       state.fetchingError = false;
-      console.log(action.payload);
       state.images = [state.currentImage, ...action.payload];
     });
     builder.addCase(getPhotos.pending, (state, action) => {

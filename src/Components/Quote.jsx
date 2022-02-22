@@ -4,7 +4,6 @@ import {
   selectQuote,
   selectFetchingError,
   selectIsFetching,
-  getQuoteOfDay,
 } from "../features/quoteSlice";
 
 function Quote() {

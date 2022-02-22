@@ -1,5 +1,5 @@
 html {
-  height: 100vh;
+  height: 100%;
 }
 
 body {
@@ -16,43 +16,32 @@ body {
   background-position: top;
   display: flex;
   flex-direction: column;
-  /* position: absolute; */
   justify-content: space-between;
   align-items: center;
   z-index: -2;
   box-shadow: inset 0 0 0 50vw rgba(0, 0, 0, 0.5);
 }
 
-.overlay {
-  position: fixed; /* Sit on top of the page content */
-  width: 100%; /* Full width (cover the whole page) */
-  height: 100%; /* Full height (cover the whole page) */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
-  z-index: -1; /* Specify a stack order in case you're using a different order for other elements */
-  cursor: pointer; /* Add a pointer on hover */
-  backdrop-filter: blur(2px);
+.location {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border-radius: 10px;
+  padding: 5px;
 }
 
-.leftButton {
-  /* position: absolute; */
-  /* justify-self: start;
-  align-self: center; */
+.navButton {
   font-size: x-large;
+  border: none;
+  background: transparent;
+  color: white;
+  z-index: 3;
 }
 
-.rightButton {
-  /* position: absolute; */
-  /* justify-self: flex-end;
-  align-self: center; */
-  font-size: x-large;
+.navButton:hover {
+  color: lightgrey;
 }
 
 .weatherContainer {
-  /* justify-self: flex-end; */
   align-self: flex-end;
   color: antiquewhite;
   display: flex;
@@ -78,12 +67,15 @@ body {
 .description {
   margin-top: 0;
   font-size: 1.8em;
+  margin-bottom: 0;
+}
+
+.weatherLocation {
+  margin-top: 0;
 }
 
 .bulletinContainer {
   width: 90%;
-  /* height: 300px; */
-  /* background-color: rgba(125, 85, 69, 0.5); */
 }
 
 .centerContainer {
@@ -96,13 +88,16 @@ body {
 
 .inputComponent {
   background-color: rgba(255, 255, 255, 0.384);
-
   border-radius: 16px;
   padding: 30px;
   width: 90%;
   color: whitesmoke;
   font-size: 2.5rem;
   backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .inputDescription {
@@ -122,7 +117,6 @@ ul {
   flex-direction: row;
   flex-wrap: wrap;
   backdrop-filter: blur(2px);
-  /* align-items: center; */
 }
 
 .bulletinContainer {
@@ -137,11 +131,11 @@ ul {
   max-width: 200px;
   min-width: 100px;
   border-radius: 16px;
-  /* background-color: rgba(9, 187, 9, 0.753); */
   padding: 10px;
   margin: 10px;
   position: relative;
   opacity: 0.8;
+  word-wrap: break-word;
 }
 
 .actions {
@@ -157,7 +151,7 @@ ul {
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.45);
   padding: 8px;
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: rgba(255, 0, 0, 0.9);
   color: white;
 }
 
@@ -183,6 +177,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 .quote {
@@ -191,15 +186,12 @@ ul {
   width: 75%;
   align-self: center;
   justify-self: center;
-  /* background-color: rgba(0, 0, 0, 0.5); */
   border-radius: 16px;
   padding: 10px;
-  /* position: absolute; */
-  /* align-self: flex-end; */
 }
 
-@media (min-width: 800px) {
-  .App {
-    /* background-size: cover; */
+@media (min-width: 700px) {
+  .weatherContainer {
+    margin-right: 5%;
   }
 }
