@@ -2,7 +2,9 @@ import { createApi } from "unsplash-js";
 import { response } from "./images";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const unsplash = createApi({ accessKey: "MY_ACCESS_KEY" });
+const unsplash = createApi({
+  accessKey: "FqHGLHi1ehTd0IdNZCKN8Fc5CJRruTU4nMnwLSvkj10",
+});
 
 const urlArray = response.map((e) => e.urls.regular);
 
