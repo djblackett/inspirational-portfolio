@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/inspirational-portfolio/static/css/main.1bd82c7f.css",
-    "main.js": "/inspirational-portfolio/static/js/main.46768921.js",
+    "main.css": "/inspirational-portfolio/static/css/main.5d703d82.css",
+    "main.js": "/inspirational-portfolio/static/js/main.af8b055b.js",
     "index.html": "/inspirational-portfolio/index.html",
-    "main.1bd82c7f.css.map": "/inspirational-portfolio/static/css/main.1bd82c7f.css.map",
-    "main.46768921.js.map": "/inspirational-portfolio/static/js/main.46768921.js.map"
+    "main.5d703d82.css.map": "/inspirational-portfolio/static/css/main.5d703d82.css.map",
+    "main.af8b055b.js.map": "/inspirational-portfolio/static/js/main.af8b055b.js.map"
   },
   "entrypoints": [
-    "static/css/main.1bd82c7f.css",
-    "static/js/main.46768921.js"
+    "static/css/main.5d703d82.css",
+    "static/js/main.af8b055b.js"
   ]
 }
