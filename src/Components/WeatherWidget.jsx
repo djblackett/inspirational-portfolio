@@ -32,7 +32,7 @@ function WeatherWidget() {
         />
         <div className="tempDescription">
           <p className="temp">
-            {String((weather.temp - 273.15).toPrecision(3))}°
+            {String((weather.temp - 273.15).toPrecision(3))}° C
           </p>
           <p className="description">{weather.description}</p>
           <p className="weatherLocation">
